@@ -736,30 +736,56 @@
           
 
 
-        @media (max-width: 768px) {
-            .particles,
-            .bg-animation,
-            .gradient-bg {
-            display: none;
+/* БЫСТРЫЙ ФИКС ДЛЯ ТЕЛЕФОНА */
+@media (max-width: 768px) {
+    /* Убираем всю тяжёлую анимацию */
+    .particles,
+    .bg-animation,
+    .gradient-bg {
+        display: none !important;
     }
     
-
-        @media (max-width: 768px) {
-            .project-card,
-            .mosaic-card,
-            .about,
-            .contacts .contact-item {
-        backdrop-filter: none;
-        background: rgba(18, 18, 26, 0.9);
+    /* Убираем размытие */
+    .project-card,
+    .mosaic-card,
+    .about,
+    .contact-item,
+    header {
+        backdrop-filter: none !important;
+        background: rgba(18, 18, 26, 0.95) !important;
+    }
+    
+    /* Убираем повороты карточек */
+    .card-1, .card-2, .card-3, .card-4, .card-5, .card-6 {
+        transform: translateY(0) rotate(0deg) !important;
+    }
+    
+    /* Уменьшаем отступы */
+    .container {
+        padding: 0 16px !important;
+    }
+    
+    .hero {
+        padding-top: 100px !important;
+    }
+    
+    /* Упрощаем карточки */
+    .project-card {
+        margin-bottom: 20px;
+    }
+    
+    /* Убираем анимацию морфинга */
+    .photo-frame {
+        animation: none !important;
     }
 }
 
+      
 
     body {
         background: #030003;
     }
 }
-        }
     </style>
 </head>
 <body>
