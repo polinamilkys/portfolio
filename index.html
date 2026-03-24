@@ -736,58 +736,59 @@
           
 
 
-/* БЫСТРЫЙ ФИКС ДЛЯ ТЕЛЕФОНА */
-@media (max-width: 768px) {
-    /* Убираем всю тяжёлую анимацию */
-    .particles,
-    .bg-animation,
-    .gradient-bg {
-        display: none !important;
-    }
+
+        @media (max-width: 768px) {
     
-    /* Убираем размытие */
-    .project-card,
-    .mosaic-card,
-    .about,
-    .contact-item,
-    header {
-        backdrop-filter: none !important;
-        background: rgba(18, 18, 26, 0.95) !important;
-    }
-    
-    /* Убираем повороты карточек */
-    .card-1, .card-2, .card-3, .card-4, .card-5, .card-6 {
-        transform: translateY(0) rotate(0deg) !important;
-    }
-    
-    /* Уменьшаем отступы */
-    .container {
-        padding: 0 16px !important;
-    }
-    
-    .hero {
-        padding-top: 100px !important;
-    }
-    
-    /* Упрощаем карточки */
-    .project-card {
-        margin-bottom: 20px;
-    }
-    
-    /* Убираем анимацию морфинга */
-    .photo-frame {
-        animation: none !important;
-    }
-}
+            .particles,
+            .bg-animation,
+            .gradient-bg {
+                display: none !important;
+            }
+            
+            
+            .project-card,
+            .mosaic-card,
+            .about,
+            .contact-item,
+            header {
+                backdrop-filter: none !important;
+                background: rgba(18, 18, 26, 0.95) !important;
+            }
+            
+            
+            .card-1, .card-2, .card-3, .card-4, .card-5, .card-6 {
+                transform: translateY(0) rotate(0deg) !important;
+            }
+            
+            
+            .container {
+                padding: 0 16px !important;
+            }
+            
+            .hero {
+                padding-top: 100px !important;
+            }
+            
+            
+            .project-card {
+                margin-bottom: 20px;
+            }
+            
+            
+            .photo-frame {
+                animation: none !important;
+            }
+        }
 
       
 
-    body {
-        background: #030003;
-    }
-}
+            body {
+                background: #030003;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-animation"></div>
     <div class="gradient-bg"></div>
