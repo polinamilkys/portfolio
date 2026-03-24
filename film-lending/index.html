@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Челябинск-40 | хоррор-фильм</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsl,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0c0f;
+            color: #e0e0e0;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .accent {
+            color: #e03a3a;
+        }
+
+       
+
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(224, 58, 58, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(224, 58, 58, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(224, 58, 58, 0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(224, 58, 58, 0.15) 0%, transparent 50%),
+                        linear-gradient(135deg, #0a0c0f 0%, #1a1e24 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .movie-title {
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .movie-title span {
+            color: #e03a3a;
+            display: block;
+            font-size: 48px;
+            font-weight: 400;
+            letter-spacing: 4px;
+        }
+
+        .movie-meta {
+            display: flex;
+            gap: 24px;
+            margin: 24px 0;
+            font-size: 18px;
+        }
+
+        .movie-meta span {
+            color: #e03a3a;
+            font-weight: 600;
+        }
+
+        .tagline {
+            font-size: 20px;
+            margin: 24px 0;
+            font-style: italic;
+            border-left: 4px solid #e03a3a;
+            padding-left: 20px;
+            color: #b0b0b0;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #e03a3a;
+            color: white;
+            box-shadow: 0 5px 15px rgba(224, 58, 58, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .btn-primary:hover {
+            background: #b02e2e;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(224, 58, 58, 0.5);
+            animation: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #e03a3a;
+            color: #e03a3a;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: #e03a3a;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        
+
+
+
+        .movie-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin: 80px 0;
+        }
+
+        .poster {
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            animation: scaleIn 0.6s ease 0.2s forwards;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .poster:hover {
+            transform: scale(1.02);
+            box-shadow: 0 30px 50px rgba(224, 58, 58, 0.3);
+        }
+
+        .description {
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .description h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .description p {
+            font-size: 16px;
+            color: #b0b0b0;
+            margin-bottom: 20px;
+        }
+
+        .cast {
+            margin-top: 30px;
+        }
+
+        .cast h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: white;
+        }
+
+        .cast-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .cast-item {
+            background: rgba(224, 58, 58, 0.1);
+            padding: 6px 14px;
+            border-radius: 30px;
+            border: 1px solid rgba(224, 58, 58, 0.3);
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .cast-item:hover {
+            transform: translateY(-3px);
+            background: rgba(224, 58, 58, 0.2);
+            border-color: #e03a3a;
+        }
+
+        .cast-item strong {
+            color: #e03a3a;
+        }
+
+        
+
+
+
+        .gallery-section {
+            margin: 80px 0;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 450px;
+            background: #1a1e24;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            transition: all 0.3s;
+        }
+
+        .slider-btn:hover {
+            background: #e03a3a;
+        }
+
+        .prev { left: 15px; }
+        .next { right: 15px; }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #444;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: #e03a3a;
+            width: 25px;
+            border-radius: 8px;
+        }
+
+      
+
+
+
+        .countdown-section {
+            background: linear-gradient(135deg, #0f1217, #1a1e24);
+            padding: 50px;
+            border-radius: 28px;
+            text-align: center;
+            margin: 60px 0;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .countdown-title {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: #0a0c0f;
+            padding: 20px;
+            border-radius: 20px;
+            min-width: 90px;
+            border: 1px solid rgba(224, 58, 58, 0.3);
+            transition: all 0.3s;
+        }
+
+        .countdown-item:hover {
+            transform: translateY(-5px);
+            border-color: #e03a3a;
+            box-shadow: 0 10px 20px rgba(224, 58, 58, 0.2);
+        }
+
+        .countdown-number {
+            font-size: 42px;
+            font-weight: 700;
+            color: #e03a3a;
+        }
+
+        .countdown-label {
+            font-size: 12px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+       
+
+
+        .reviews-section {
+            margin: 60px 0;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .review-card {
+            background: #1a1e24;
+            padding: 24px;
+            border-radius: 20px;
+            border: 1px solid rgba(224, 58, 58, 0.2);
+            transition: all 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        .review-card:nth-child(1) { animation-delay: 0.1s; }
+        .review-card:nth-child(2) { animation-delay: 0.3s; }
+        .review-card:nth-child(3) { animation-delay: 0.5s; }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            border-color: #e03a3a;
+        }
+
+        .review-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #b0b0b0;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .review-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .review-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #2a2f38;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e03a3a;
+            font-weight: bold;
+        }
+
+        .review-name {
+            font-weight: 600;
+            color: white;
+        }
+
+        .review-rating {
+            color: #e03a3a;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        
+
+
+        .subscribe-section {
+            background: linear-gradient(135deg, #0f1217, #1a1e24);
+            padding: 50px;
+            border-radius: 28px;
+            text-align: center;
+            margin: 60px 0;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .subscribe-title {
+            font-size: 28px;
+            margin-bottom: 12px;
+            color: white;
+        }
+
+        .subscribe-desc {
+            color: #a0a0a0;
+            margin-bottom: 25px;
+        }
+
+        .subscribe-form {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .subscribe-form input {
+            flex: 1;
+            padding: 14px 20px;
+            background: #0a0c0f;
+            border: 1px solid #2a2f38;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .subscribe-form input:focus {
+            outline: none;
+            border-color: #e03a3a;
+            box-shadow: 0 0 10px rgba(224, 58, 58, 0.3);
+        }
+
+        .subscribe-message {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #e03a3a;
+            display: none;
+        }
+
+        
+
+
+        .actors-section {
+            background: linear-gradient(135deg, #0f1217, #1a1e24);
+            padding: 50px;
+            border-radius: 28px;
+            margin: 60px 0;
+        }
+
+        .actors-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .actor-card {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        .actor-card:nth-child(1) { animation-delay: 0.1s; }
+        .actor-card:nth-child(2) { animation-delay: 0.3s; }
+        .actor-card:nth-child(3) { animation-delay: 0.5s; }
+        .actor-card:nth-child(4) { animation-delay: 0.7s; }
+
+        .actor-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #2a2f38;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: #e03a3a;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .actor-card:hover .actor-photo {
+            border-color: #e03a3a;
+            transform: scale(1.1);
+        }
+
+        .actor-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .actor-role {
+            font-size: 13px;
+            color: #888;
+        }
+
+        .actions {
+            margin: 48px 0 80px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .actions .btn-primary {
+            animation: pulse 2s infinite;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid rgba(224, 58, 58, 0.2);
+            color: #666;
+            font-size: 14px;
+        }
+
+        
+
+
+
+        @media (max-width: 900px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .movie-title {
+                font-size: 48px;
+            }
+            .movie-title span {
+                font-size: 32px;
+            }
+
+            .movie-showcase {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-content {
+                max-width: 100%;
+                text-align: center;
+            }
+
+            .movie-meta {
+                justify-content: center;
+            }
+
+            .tagline {
+                text-align: left;
+                margin: 20px 0;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .actors-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+
+            .countdown-item {
+                min-width: 70px;
+                padding: 15px;
+            }
+
+            .countdown-number {
+                font-size: 28px;
+            }
+
+            .slide {
+                height: 300px;
+            }
+
+            .slider-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .actors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .countdown {
+                gap: 12px;
+            }
+
+            .countdown-item {
+                min-width: 60px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="movie-title">
+                        ЧЕЛЯБИНСК-40
+                        <span>ХОРРОР</span>
+                    </h1>
+                    <div class="movie-meta">
+                        <div><span>2026</span></div>
+                        <div><span>хоррор</span> / <span>мистика</span></div>
+                        <div><span>18+</span></div>
+                    </div>
+                    <div class="tagline">
+                        "Они пришли не за тобой. Они пришли за всеми"
+                    </div>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary" id="buyTicket">Купить билет</a>
+                        <a href="https://youtu.be/mxL63fepeIw?si=JKfjzcLZSMC425Dl" target="_blank" class="btn btn-outline" id="watchTrailer">Смотреть трейлер (ютуб)</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="movie-showcase">
+                <img src="images/загруженное.jpg" alt="Постер фильма Челябинск-40" class="poster" id="poster">
+                <div class="description">
+                    <h2>СЮЖЕТ</h2>
+                    <p>В секретном городе под Челябинском, которого нет на картах, проводили странные эксперименты. Город давно закрыли, но иногда по ночам местные видят свет. Съемочная группа решает снять об этом фильм и перестает выходить на связь.</p>
+                    <div class="cast">
+                        <h3>В РОЛЯХ</h3>
+                        <div class="cast-list">
+                            <span class="cast-item"><strong>Артем Соколов</strong> - следователь</span>
+                            <span class="cast-item"><strong>Иван Иванов</strong> - выживший</span>
+                            <span class="cast-item"><strong>Дмитрий Волков</strong> - оператор</span>
+                            <span class="cast-item"><strong>Елена Морозова</strong> - звукорежиссер</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-section">
+                <h2 class="section-title">КАДРЫ ИЗ ФИЛЬМА</h2>
+                <div class="slider-container">
+                    <button class="slider-btn prev" id="prevBtn">❮</button>
+                    <div class="slider" id="slider">
+                        <div class="slide"><img src="images/кадры1.jpg" alt="Кадр 1"></div>
+                        <div class="slide"><img src="images/кадры2.jpg" alt="Кадр 2"></div>
+                        <div class="slide"><img src="images/кадры3.jpg" alt="Кадр 3"></div>
+                        <div class="slide"><img src="images/кадры4.jpg" alt="Кадр 4"></div>
+                        <div class="slide"><img src="images/кадры5.jpg" alt="Кадр 5"></div>
+                    </div>
+                    <button class="slider-btn next" id="nextBtn">❯</button>
+                </div>
+                <div class="slider-dots" id="sliderDots"></div>
+            </div>
+
+            <div class="countdown-section">
+                <h2 class="countdown-title">ДО ПРЕМЬЕРЫ ОСТАЛОСЬ</h2>
+                <div class="countdown" id="countdown">
+                    <div class="countdown-item"><div class="countdown-number" id="days">00</div><div class="countdown-label">ДНЕЙ</div></div>
+                    <div class="countdown-item"><div class="countdown-number" id="hours">00</div><div class="countdown-label">ЧАСОВ</div></div>
+                    <div class="countdown-item"><div class="countdown-number" id="minutes">00</div><div class="countdown-label">МИНУТ</div></div>
+                    <div class="countdown-item"><div class="countdown-number" id="seconds">00</div><div class="countdown-label">СЕКУНД</div></div>
+                </div>
+            </div>
+
+            <div class="reviews-section">
+                <h2 class="section-title">ОТЗЫВЫ</h2>
+                <div class="reviews-grid">
+                    <div class="review-card">
+                        <div class="review-text">"Атмосфера валит с первых минут. Наконец-то нормальный хоррор, а не просто скримеры."</div>
+                        <div class="review-author">
+                            <div class="review-avatar">АС</div>
+                            <div><div class="review-name">Алексей</div><div class="review-rating">★★★★★</div></div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-text">"Смотрела в наушниках - мурашки по коже. История действительно пугает тем, что могло произойти на самом деле."</div>
+                        <div class="review-author">
+                            <div class="review-avatar">ЕК</div>
+                            <div><div class="review-name">Екатерина</div><div class="review-rating">★★★★★</div></div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-text">Фильм держит в напряжении до самого конца."</div>
+                        <div class="review-author">
+                            <div class="review-avatar">ДМ</div>
+                            <div><div class="review-name">Дмитрий</div><div class="review-rating">★★★★☆</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subscribe-section">
+                <h2 class="subscribe-title">НЕ ПРОПУСТИТЕ ПРЕМЬЕРУ</h2>
+                <div class="subscribe-desc">Подпишитесь, чтобы узнать первыми о дате выхода</div>
+                <div class="subscribe-form" id="subscribeForm">
+                    <input type="text" id="subName" placeholder="Ваше имя">
+                    <input type="email" id="subEmail" placeholder="Email">
+                    <button class="btn btn-primary" id="submitSubscribe">Подписаться</button>
+                </div>
+                <div class="subscribe-message" id="subscribeMessage">Спасибо! Вы подписаны на новости</div>
+            </div>
+
+            <div class="actors-section">
+                <h2 class="section-title">АКТЁРСКИЙ СОСТАВ</h2>
+                <div class="actors-grid">
+                    <div class="actor-card"><div class="actor-photo">АС</div><div class="actor-name">Артем Соколов</div><div class="actor-role">следователь</div></div>
+                    <div class="actor-card"><div class="actor-photo">ИИ</div><div class="actor-name">Иван Иванов</div><div class="actor-role">выживший</div></div>
+                    <div class="actor-card"><div class="actor-photo">ДВ</div><div class="actor-name">Дмитрий Волков</div><div class="actor-role">оператор</div></div>
+                    <div class="actor-card"><div class="actor-photo">ЕМ</div><div class="actor-name">Елена Морозова</div><div class="actor-role">звукорежиссер</div></div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <a href="#" class="btn btn-primary" id="buyTicket2">Купить билет</a>
+                <a href="https://youtu.be/mxL63fepeIw?si=JKfjzcLZSMC425Dl" target="_blank" class="btn btn-outline" id="watchTrailer2">Смотреть трейлер (ютуб)</a>
+            </div>
+
+            <footer>
+                <p>Челябинск-40 - леденящая душу история. Премьера 31 октября 2026</p>
+                <p style="margin-top: 8px;">© 2026 Все права защищены</p>
+            </footer>
+        </div>
+    </main>
+
+    <script>
+        const slider = document.getElementById('slider');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dotsContainer = document.getElementById('sliderDots');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            document.querySelectorAll('.dot').forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
+        }
+
+        function createDots() {
+            slides.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (i === currentSlide) dot.classList.add('active');
+                dot.addEventListener('click', () => { currentSlide = i; updateSlider(); });
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        prevBtn.addEventListener('click', () => { currentSlide = (currentSlide - 1 + totalSlides) % totalSlides; updateSlider(); });
+        nextBtn.addEventListener('click', () => { currentSlide = (currentSlide + 1) % totalSlides; updateSlider(); });
+        createDots();
+
+        function updateCountdown() {
+            const premiere = new Date('October 31, 2026 00:00:00').getTime();
+            const now = new Date().getTime();
+            const diff = premiere - now;
+            if (diff > 0) {
+                document.getElementById('days').innerText = Math.floor(diff / (1000*60*60*24)).toString().padStart(2,'0');
+                document.getElementById('hours').innerText = Math.floor((diff % (1000*60*60*24)) / (1000*60*60)).toString().padStart(2,'0');
+                document.getElementById('minutes').innerText = Math.floor((diff % (1000*60*60)) / (1000*60)).toString().padStart(2,'0');
+                document.getElementById('seconds').innerText = Math.floor((diff % (1000*60)) / 1000).toString().padStart(2,'0');
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        document.querySelectorAll('#buyTicket, #buyTicket2').forEach(btn => {
+            btn.addEventListener('click', (e) => { e.preventDefault(); alert('Билеты появятся в продаже ближе к премьере 31 октября 2026'); });
+        });
+
+        const subBtn = document.getElementById('submitSubscribe');
+        const subName = document.getElementById('subName');
+        const subEmail = document.getElementById('subEmail');
+        const subMsg = document.getElementById('subscribeMessage');
+        subBtn.addEventListener('click', () => {
+            if (subName.value.trim() && subEmail.value.trim()) {
+                subMsg.style.display = 'block';
+                subName.value = ''; subEmail.value = '';
+                setTimeout(() => subMsg.style.display = 'none', 3000);
+            } else alert('Заполните имя и email');
+        });
+    </script>
+</body>
+</html>
